@@ -1,6 +1,5 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Project description
+This is a personal project I'm currently working on. The aim is to develop an app with exposure to APIs using GraphQL.
 
 ## Available Scripts
 
