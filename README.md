@@ -1,5 +1,5 @@
 ### Project description
-This is a personal project I'm currently working on. The aim is to develop an app with Redux and exposure to APIs using GraphQL.
+This is a personal project I'm currently working on. The aim is to develop a React app with state management with Redux and exposure to APIs using GraphQL.
 
 ## Available Scripts
 
