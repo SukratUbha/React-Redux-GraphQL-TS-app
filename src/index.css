@@ -14,3 +14,7 @@ code {
 .header {
   height: 100px;
 }
+.card{
+  margin:5%;
+  display: flexbox;
+}
