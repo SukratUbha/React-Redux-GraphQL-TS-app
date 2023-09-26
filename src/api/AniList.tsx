@@ -2,7 +2,10 @@ type response = {
     'data': {
         'Page': {
             'media': [{
-                'coverImage': string,
+                'coverImage': {
+                    'medium': string
+                }
+                    
                 'id': number,
                 'description':string
                 'title': {

@@ -4,16 +4,15 @@ import Button from 'react-bootstrap/Button';
 import callAniList from '../api/AniList';
 import { increment } from '../features/counter/counterSlice';
 import Cards from './Card';
-import { JsxAttribute } from 'typescript';
-import { CardProps } from 'react-bootstrap/Card'
-
 type counterType = {
   counter: { value: number }
 }
 export type animeType = {
-  'coverImage': string,
   'id': number,
   'description': string,
+  'coverImage': {
+    'medium': string
+  },
   'title': {
     'english': string
   }
@@ -28,7 +27,7 @@ export default function Search() {
     if (anime !== undefined) {
       return <>{
         anime.map((a) => (
-          <Cards {...a} key={a.id}/>
+          <Cards {...a} key={a.id} />
         ))
       }</>
     }
