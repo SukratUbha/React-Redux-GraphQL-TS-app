@@ -4,15 +4,18 @@ import Button from 'react-bootstrap/Button';
 import callAniList from '../api/AniList';
 import { increment } from '../features/counter/counterSlice';
 import Cards from './Card';
+import { JsxAttribute } from 'typescript';
+import { CardProps } from 'react-bootstrap/Card'
 
 type counterType = {
   counter: { value: number }
 }
-type animeType = {
+export type animeType = {
   'coverImage': string,
   'id': number,
+  'description': string,
   'title': {
-      'english': string
+    'english': string
   }
 }
 
@@ -21,22 +24,39 @@ export default function Search() {
   const [anime, setAnime] = useState<animeType[]>([]);
   const d = useDispatch();
 
+  function MakeCards(): JSX.Element {
+    if (anime !== undefined) {
+      return <>{
+        anime.map((a) => (
+          <Cards {...a} key={a.id}/>
+        ))
+      }</>
+    }
+    else {
+      return <p>loading</p>
+    }
+  }
+
   useEffect(() => {
     const runCalls = async () => {
       const result = await callAniList();
-      if(result != undefined) {
+      if (result !== undefined) {
         setAnime(result);
       }
     }
-    runCalls()
-  }, [anime])
-
+    runCalls();
+  }, [])
 
   return (
     <div>
       <div>There are currently {value} items loaded</div>
       <Button onClick={() => d(increment())}>Search</Button>
-      <Cards />
+      {/* <Cards { ...anime[0] }/> */}
+      <div className="centered">
+        <div className="cards">
+          <MakeCards />
+        </div>
+      </div>
     </div>
   );
 }
