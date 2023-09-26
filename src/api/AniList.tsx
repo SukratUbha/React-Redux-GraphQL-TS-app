@@ -4,6 +4,7 @@ type response = {
             'media': [{
                 'coverImage': string,
                 'id': number,
+                'description':string
                 'title': {
                     'english': string
                 }
@@ -13,15 +14,16 @@ type response = {
 }
 
 //Code to fetch data from anilist api accoding to documentation.
-//Modified to fetch 50 anime 1-50 by id
+//Modified to fetch 51 anime 1-51 by id
 export default async function callAniList() {
     var query = `query {
-                    Page(page: 1, perPage: 50) {
+                    Page(page: 1, perPage: 51) {
                         media(type: ANIME) {
                             id
                             title {
                                 english
                             }
+                            description
                             coverImage{
                                 medium
                             }  
