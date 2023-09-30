@@ -3,10 +3,15 @@ import { useSelector, useDispatch } from 'react-redux'
 import Button from 'react-bootstrap/Button';
 import callAniList from '../api/AniList';
 import { increment } from '../features/counter/counterSlice';
+import { setAnime as f } from '../features/counter/likesSlice'
 import Cards from './Card';
+import { AppDispatch } from '../features/store'
+import { store } from '../features/store';
+
 type counterType = {
   counter: { value: number }
 }
+
 export type animeType = {
   'id': number,
   'description': string,
@@ -14,14 +19,18 @@ export type animeType = {
     'medium': string
   },
   'title': {
-    'english': string
+    'english': string,
+    'romaji':string
   }
 }
 
 export default function Search() {
   const { value } = useSelector((state: counterType) => state.counter)
+  
   const [anime, setAnime] = useState<animeType[]>([]);
   const d = useDispatch();
+  const an = store.getState().likes.anime
+  console.log('an: ' + an)
 
   function MakeCards(): JSX.Element {
     if (anime !== undefined) {
@@ -41,6 +50,7 @@ export default function Search() {
       const result = await callAniList();
       if (result !== undefined) {
         setAnime(result);
+        d(f(...result))
       }
     }
     runCalls();
