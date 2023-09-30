@@ -10,6 +10,7 @@ type response = {
                 'description':string
                 'title': {
                     'english': string
+                    'romaji':string
                 }
             }]
         }
@@ -21,10 +22,11 @@ type response = {
 export default async function callAniList() {
     var query = `query {
                     Page(page: 1, perPage: 51) {
-                        media(type: ANIME) {
+                        media(type: ANIME, isAdult:false) {
                             id
                             title {
                                 english
+                                romaji
                             }
                             description
                             coverImage{

@@ -8,4 +8,4 @@ export const store = configureStore({
     likes: likesReducer
   },
 });
-
+export type AppDispatch = typeof store.dispatch

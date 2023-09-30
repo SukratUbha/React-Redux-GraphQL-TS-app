@@ -1,8 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
-
-const initialState = {
-    likes: 0
+import { animeType } from '../../Components/Search';
+type stateType={
+  likes:number,
+  anime:animeType
 }
+const initialState = {
+    likes: 0,
+    anime: {}
+} as stateType
 
 const likesSlice = createSlice({
   name: 'likes',
@@ -13,10 +18,14 @@ const likesSlice = createSlice({
     },
     decrement(state){
         state.likes++;
-    }
+    },
+    setAnime(state, payload){
+      state.anime = {...payload.payload}
+    },
+
   }
 });
 
-export const {increment, decrement} = likesSlice.actions
+export const {increment, decrement, setAnime} = likesSlice.actions
 
 export default likesSlice.reducer
