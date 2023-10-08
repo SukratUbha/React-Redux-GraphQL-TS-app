@@ -1,16 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Button from 'react-bootstrap/Button';
 import callAniList from '../api/AniList';
-import { increment } from '../features/counter/counterSlice';
-import { setAnime as f } from '../features/counter/likesSlice'
+import { setAnime, stateType } from '../features/track/animeSlice'
 import Cards from './Card';
-import { AppDispatch } from '../features/store'
-import { store } from '../features/store';
-
-type counterType = {
-  counter: { value: number }
-}
 
 export type animeType = {
   'id': number,
@@ -25,17 +18,14 @@ export type animeType = {
 }
 
 export default function Search() {
-  const { value } = useSelector((state: counterType) => state.counter)
+  const dispatch = useDispatch();
+  const an = useSelector((state: any) => state.anime.anime)
+  // console.log('length '+an.length)
   
-  const [anime, setAnime] = useState<animeType[]>([]);
-  const d = useDispatch();
-  const an = store.getState().likes.anime
-  console.log('an: ' + an)
-
   function MakeCards(): JSX.Element {
-    if (anime !== undefined) {
+    if (an.length) {
       return <>{
-        anime.map((a) => (
+        an.map((a:animeType) => (
           <Cards {...a} key={a.id} />
         ))
       }</>
@@ -49,18 +39,16 @@ export default function Search() {
     const runCalls = async () => {
       const result = await callAniList();
       if (result !== undefined) {
-        setAnime(result);
-        d(f(...result))
+        dispatch(setAnime(result))
       }
     }
-    runCalls();
-  }, [])
+    runCalls()
+  }, [dispatch])
 
   return (
     <div>
-      <div>There are currently {value} items loaded</div>
-      <Button onClick={() => d(increment())}>Search</Button>
-      {/* <Cards { ...anime[0] }/> */}
+      {/* <div>There are currently {value} items loaded</div> */}
+      <Button>Search</Button>
       <div className="centered">
         <div className="cards">
           <MakeCards />
