@@ -2,8 +2,9 @@ import { useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Button from 'react-bootstrap/Button';
 import callAniList from '../api/AniList';
-import { setAnime, stateType } from '../features/track/animeSlice'
+import { setAnime } from '../features/anime/animeSlice'
 import Cards from './Card';
+import { RootState } from '../features/store'
 
 export type animeType = {
   'id': number,
@@ -19,8 +20,7 @@ export type animeType = {
 
 export default function Search() {
   const dispatch = useDispatch();
-  const an = useSelector((state: any) => state.anime.anime)
-  // console.log('length '+an.length)
+  const an = useSelector((state:RootState) => state.anime.anime)
   
   function MakeCards(): JSX.Element {
     if (an.length) {

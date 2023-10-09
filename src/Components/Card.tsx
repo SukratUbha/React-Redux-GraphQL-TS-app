@@ -1,11 +1,13 @@
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import { animeType } from './Search';
-import { addLike as likesIncrement, stateType } from '../features/track/animeSlice';
+import { animeType } from './Home';
+import { addLike, dislike } from '../features/anime/animeSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../features/store';
 
 export default function Cards(crd: animeType) {
     const dispatch = useDispatch();
+    const value = useSelector((state:RootState) => state.anime.lCounter)
 
     return (
         <Card>
@@ -19,9 +21,9 @@ export default function Cards(crd: animeType) {
                 </Card.Text>
             </Card.Body>
             <div className="btn-card-div">
-                <Button variant="primary" className="btn-card-like" onClick={() => dispatch(likesIncrement(crd.id))} value={crd.id}>Like</Button>
-                {/* <p className="like-counter">{value[crd.id] ?? 0}</p> */}
-                <Button variant="primary" className="btn-card-dislike">dislike</Button>
+                <Button variant="primary" className="btn-card-like" onClick={() => dispatch(addLike(crd.id))}>Like</Button>
+                <p className="like-counter">{value[crd.id] ?? 0}</p>
+                <Button variant="primary" className="btn-card-dislike" onClick={() => dispatch(dislike(crd.id))}>dislike</Button>
             </div>
         </Card>
     )

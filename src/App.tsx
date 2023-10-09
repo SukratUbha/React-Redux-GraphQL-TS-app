@@ -1,8 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Header from './Components/Header';
-import Search from './Components/Search';
+import Header from './components/Header';
+import Search from './components/Home';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
