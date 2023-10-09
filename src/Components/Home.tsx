@@ -1,6 +1,6 @@
 import { useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 import callAniList from '../api/AniList';
 import { setAnime } from '../features/anime/animeSlice'
 import Cards from './Card';
@@ -18,7 +18,7 @@ export type animeType = {
   }
 }
 
-export default function Search() {
+export default function Home() {
   const dispatch = useDispatch();
   const an = useSelector((state:RootState) => state.anime.anime)
   
@@ -31,7 +31,10 @@ export default function Search() {
       }</>
     }
     else {
-      return <p>loading</p>
+      return(
+      <Spinner className='spinner' animation="border" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </Spinner>)
     }
   }
 
@@ -46,9 +49,7 @@ export default function Search() {
   }, [dispatch])
 
   return (
-    <div>
-      {/* <div>There are currently {value} items loaded</div> */}
-      <Button>Search</Button>
+    <div className='home'>
       <div className="centered">
         <div className="cards">
           <MakeCards />
