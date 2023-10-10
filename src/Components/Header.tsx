@@ -5,7 +5,7 @@ export default function Header() {
   return (
     <div className="header">
       <div className="header-title">
-      Header
+      <h2>Anime Locator</h2>
       </div>
       <div className="header-search">
         <Search />
