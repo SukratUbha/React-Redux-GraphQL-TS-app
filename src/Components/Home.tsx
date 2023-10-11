@@ -17,10 +17,16 @@ export type animeType = {
     'romaji':string
   }
 }
+export const runCalls = async (name:string) => {
+  const result = await callAniList(name);
+  if (result !== undefined) {
+    return result
+  }
+}
 
 export default function Home() {
-  const dispatch = useDispatch();
   const an = useSelector((state:RootState) => state.anime.anime)
+  const dispatch = useDispatch();
   
   function MakeCards(): JSX.Element {
     if (an.length) {
@@ -39,13 +45,17 @@ export default function Home() {
   }
 
   useEffect(() => {
-    const runCalls = async () => {
-      const result = await callAniList();
-      if (result !== undefined) {
-        dispatch(setAnime(result))
+    // const runCalls = async () => {
+    //   const result = await callAniList('');
+    //   if (result !== undefined) {
+    //     dispatch(setAnime(result))
+    //   }
+    // }
+    runCalls('').then((r)=>{
+      if(r !== undefined) {
+        dispatch(setAnime(r));
       }
-    }
-    runCalls()
+    })
   }, [dispatch])
 
   return (
