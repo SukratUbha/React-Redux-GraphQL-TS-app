@@ -1,5 +1,5 @@
 ### Project description
-This is a personal project I'm currently working on. The aim is to develop a React app with state management using Redux and exposure to APIs using GraphQL.
+App to fetch, like, dislike, and browse anime from AniList using GraphQL, Redux, Rect, and TS.
 
 ## Available Scripts
 
