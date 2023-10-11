@@ -10,9 +10,9 @@ export default function Search() {
   const dispatch = useDispatch();
   const makeSearch = () => {
     if (txt.current !== undefined) {
-      runCalls(txt.current).then((r) => {
-        if (r !== undefined) {
-          dispatch(setAnime(r));
+      runCalls(txt.current).then((res) => {
+        if (res !== undefined && res.length > 0) {
+          dispatch(setAnime(res));
         }
       })
     }
