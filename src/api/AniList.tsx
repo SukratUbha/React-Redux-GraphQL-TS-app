@@ -5,12 +5,12 @@ type response = {
                 'coverImage': {
                     'medium': string
                 }
-                    
+
                 'id': number,
-                'description':string
+                'description': string
                 'title': {
                     'english': string
-                    'romaji':string
+                    'romaji': string
                 }
             }]
         }
@@ -19,8 +19,9 @@ type response = {
 
 //Code to fetch data from anilist api accoding to documentation.
 //Modified to fetch 51 anime 1-51 by id
-export default async function callAniList() {
-    var query = `query {
+export default async function callAniList(name: string) {
+    if (name === '') {
+        var query = `query {
                     Page(page: 1, perPage: 51) {
                         media(type: ANIME, isAdult:false) {
                             id
@@ -35,7 +36,24 @@ export default async function callAniList() {
                         }
                     }
                 }`;
-
+    }
+    else{
+        var query = `query {
+            Page(page: 1, perPage: 51) {
+                media(type: ANIME, isAdult:false, search:"${name}") {
+                    id
+                    title {
+                        english
+                        romaji
+                    }
+                    description
+                    coverImage{
+                        medium
+                    }  
+                }
+            }
+        }`;
+    }
     var url = 'https://graphql.anilist.co',
         options = {
             method: 'POST',
