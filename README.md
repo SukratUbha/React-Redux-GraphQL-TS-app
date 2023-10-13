@@ -1,5 +1,5 @@
 ### Project description
-App to fetch, like, dislike, and browse anime from AniList using GraphQL, Redux, Rect, and TS.
+Browsing and rating platform for anime world from AniList using GraphQL, Redux, React, and TS.
 
 ## Available Scripts
 
